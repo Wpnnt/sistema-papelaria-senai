@@ -9,6 +9,8 @@ Este projeto é um banco de dados para papelarias. Ele foi criado usando as segu
 * MySQL Workbench
 * Spring Security
 * H2 Server
+## Diagrama
+![image](https://github.com/Wpnnt/projeto-final-backend/assets/93552279/db54e735-2249-447b-a228-1360044b0b38)
 ## Funcionalidades
 
 O projeto possui as seguintes funcionalidades:
@@ -46,7 +48,6 @@ cd projeto-final-backend
 
 
 ## Uso
-
 Para usar o projeto, acesse a URL `http://localhost:8080` no seu navegador.
 
 ## Contato
