@@ -54,4 +54,5 @@ Para usar o projeto, acesse a URL `http://localhost:8080` no seu navegador.
 
 Se você tiver alguma dúvida ou problema com o projeto, entre em contato com o autor:
 
-* [Paulo Vitor](https://github.com/Wpnnt) [Rodrigo Duarte Silva]([https://github.com/Wpnnt](https://github.com/rodrigoduartesilva)https://github.com/rodrigoduartesilva) 
+* [Paulo Vitor](https://github.com/Wpnnt)
+* [Rodrigo Duarte Silva](https://github.com/rodrigoduartesilva) 
