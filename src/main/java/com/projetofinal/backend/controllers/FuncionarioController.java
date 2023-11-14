@@ -20,7 +20,7 @@ import com.projetofinal.backend.services.FuncionarioService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping(value = "/funcionario")
+@RequestMapping(value = "/funcionarios")
 public class FuncionarioController {
 
 	@Autowired
