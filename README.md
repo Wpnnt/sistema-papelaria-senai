@@ -16,7 +16,7 @@ Este projeto é um banco de dados para papelarias. Ele foi criado usando as segu
 O projeto possui as seguintes funcionalidades:
 
 * Cadastro de produtos
-* Cadastro de clientes
+* Cadastro de funcionários
 * Controle de estoque
 
 ## Instalação
