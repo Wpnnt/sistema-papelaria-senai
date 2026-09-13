@@ -14,9 +14,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
-public class Funcionario implements UserDetails {
+@Table(name = "employees")
+public class Employee implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -24,30 +26,33 @@ public class Funcionario implements UserDetails {
 	private Integer id;
 
 	@Column(nullable = false)
-	private String nome;
+	private String name;
 
 	@Column(nullable = false)
-	private String senha;
+	private String password;
 
 	@Column(unique = true, nullable = false)
 	private String email;
-	@Column(unique = true)
-	private String setor;
+
+	private String department;
+
 	@ManyToMany
-	@JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
-	private List<Perfil> perfil;
+	@JoinTable(
+		name = "employee_roles",
+		joinColumns = @JoinColumn(name = "employee_id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id")
+	)
+	private List<Role> roles;
 
-	public Funcionario() {
-	}
+	public Employee() {}
 
-	public Funcionario(Integer id, String nome, String senha, String email,String setor, List<Perfil> perfil) {
+	public Employee(Integer id, String name, String password, String email, String department, List<Role> roles) {
 		this.id = id;
-		this.nome = nome;
-		this.senha = senha;
+		this.name = name;
+		this.password = password;
 		this.email = email;
-		this.perfil = perfil;
-		this.setor = setor;
-		
+		this.department = department;
+		this.roles = roles;
 	}
 
 	public Integer getId() {
@@ -58,20 +63,16 @@ public class Funcionario implements UserDetails {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -81,60 +82,55 @@ public class Funcionario implements UserDetails {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getSetor (String setor) {
-		return setor;
-	}
-	public void setSetor (String setor) {
-		this.setor = setor;
-	}
-	public List<Perfil> getPerfil() {
-		return perfil;
+
+	public String getDepartment() {
+		return department;
 	}
 
-	public void setPerfil(List<Perfil> perfil) {
-		this.perfil = perfil;
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return this.perfil;
+		return this.roles;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return this.senha;
+		return this.password;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return this.email;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
-
 }

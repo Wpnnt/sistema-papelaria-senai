@@ -5,7 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class EmailModelDTO {
+public class EmailDTO {
+
 	@NotBlank
 	@Email
 	private String emailFrom;
@@ -15,8 +16,8 @@ public class EmailModelDTO {
 	private String emailTo;
 
 	@NotBlank
-	private String tituloEmail;
+	private String subject;
 
 	@NotBlank
-	private String corpoEmail;
+	private String body;
 }

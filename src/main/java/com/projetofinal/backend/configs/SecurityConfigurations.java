@@ -19,11 +19,14 @@ public class SecurityConfigurations {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/usuario").hasAuthority("COMUM")
-						.requestMatchers(HttpMethod.GET, "/usuario/*").hasAuthority("COMUM")
-						.requestMatchers(HttpMethod.POST).hasAuthority("ADMIN").requestMatchers(HttpMethod.PUT)
-						.hasAuthority("ADMIN").requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN").anyRequest()
-						.authenticated())
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/h2-console/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/employees/**", "/products/**").hasAnyAuthority("USER", "ADMIN")
+						.requestMatchers(HttpMethod.POST).hasAuthority("ADMIN")
+						.requestMatchers(HttpMethod.PUT).hasAuthority("ADMIN")
+						.requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
+						.anyRequest().authenticated())
+				.headers(headers -> headers.frameOptions(frame -> frame.disable()))
 				.httpBasic(Customizer.withDefaults());
 		return http.build();
 	}

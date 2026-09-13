@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.projetofinal.backend.entities.Funcionario;
+import com.projetofinal.backend.entities.Employee;
 
 @Repository
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
-	Optional<Funcionario> findByEmail(String email);
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+	Optional<Employee> findByEmail(String email);
 }

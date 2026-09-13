@@ -1,60 +1,99 @@
-# Projeto Final Back-End SENAI
+# Projeto Final Back-End - Papelaria
 
-Este projeto é um banco de dados para papelarias. Ele foi criado usando as seguintes tecnologias:
+API REST desenvolvida como projeto final do curso de backend (SENAI / FIRJAN). O sistema gerencia produtos, controle de estoque basico, cadastro de funcionarios com controle de acesso, envio de e-mails e upload de imagens.
 
-* Java
-* Spring Boot
-* MySQL
-* MySQL Connector
-* MySQL Workbench
-* Spring Security
-* H2 Server
-## Diagrama
-![image](https://github.com/Wpnnt/projeto-final-backend/assets/93552279/db54e735-2249-447b-a228-1360044b0b38)
+## Tecnologias Utilizadas
+
+- Java 17
+- Spring Boot 3
+- Spring Data JPA / Hibernate
+- Spring Security (HTTP Basic e criptografia com BCrypt)
+- MySQL / H2 Database
+- SpringDoc OpenAPI (Swagger UI)
+- Spring Mail
+- Maven
+
 ## Funcionalidades
 
-O projeto possui as seguintes funcionalidades:
+- Cadastro, listagem, edicao e exclusao de produtos
+- Cadastro e gerenciamento de funcionarios
+- Controle de permissoes (perfis ADMIN e USER)
+- Envio de e-mails de notificacao
+- Upload e armazenamento de fotos em disco local
+- Documentacao interativa de rotas via Swagger
 
-* Cadastro de produtos
-* Cadastro de funcionários
-* Controle de estoque
+## Modelo de Dados
 
-## Instalação
+O banco de dados e estruturado com entidades em ingles seguindo o padrao da aplicacao:
+- Employee: dados cadastrais, credenciais de acesso e departamento
+- Role: niveis de acesso atribuidos aos funcionarios (tabela associativa employee_roles)
+- Product: informacoes de estoque, categoria, quantidade e preco
+- EmailModel: registro de mensagens enviadas e status de entrega
 
-Para instalar o projeto, siga estas etapas:
+![Diagrama de Entidade e Relacionamento](docs/diagram.png)
 
-1. Clone o projeto do GitHub:
+## Como Executar o Projeto
 
-git clone https://github.com/Wpnnt/projeto-final-backend
+### Pre-requisitos
+- Java JDK 17 instalado
+- MySQL instalado e rodando localmente (ou uso do perfil de testes com H2)
 
+### Passos
 
-2. Vá para a pasta do projeto:
-
+1. Clone o repositorio:
+```bash
+git clone https://github.com/Wpnnt/projeto-final-backend.git
 cd projeto-final-backend
-
-
-3. Instale as dependências do Spring Boot:
-
-```bash
-  Spring starter, spring web,h2 server,Spring test, MySQL Connector, Spring Security.
 ```
 
+2. Configure o banco de dados:
+Por padrao, a aplicacao utiliza as configuracoes de `src/main/resources/application-dev.properties`.
+Verifique se a base de dados `apispringboot` existe no seu MySQL e ajuste o usuario e a senha conforme o seu ambiente local.
 
-4. Inicie o servidor local:
-
-```bash
-   Clique direito no projeto > selecione "Run As" > Spring Boot App
+Para rodar com banco em memoria H2 (sem necessidade de instalar MySQL), altere em `src/main/resources/application.properties`:
+```properties
+spring.profiles.active=test
 ```
 
+3. Execute a aplicacao:
 
-## Uso
-Para usar o projeto, acesse a URL `http://localhost:8080` no seu navegador.
+No Windows:
+```bash
+.\mvnw.cmd spring-boot:run
+```
 
-## Contato
+No Linux ou macOS:
+```bash
+./mvnw spring-boot:run
+```
 
-Se você tiver alguma dúvida ou problema com o projeto, entre em contato com o autor:
+Ou execute a classe `BackendApplication` diretamente pela sua IDE (Eclipse, IntelliJ ou VS Code).
 
-* [Paulo Vitor](https://github.com/Wpnnt)
-* [Rodrigo Duarte Silva](https://github.com/rodrigoduartesilva)
-* Odara Jara
-* Bryan
+## Documentacao da API
+
+Com a aplicacao rodando, acesse a documentacao interativa das rotas pelo Swagger:
+- http://localhost:8080/swagger-ui/index.html
+
+### Principais Endpoints
+
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| GET | /products | Lista todos os produtos cadastrados |
+| GET | /products/{id} | Busca produto por ID |
+| POST | /products | Cadastra um novo produto |
+| PUT | /products/{id} | Atualiza dados de um produto |
+| DELETE | /products/{id} | Remove um produto |
+| GET | /employees | Lista os funcionarios cadastrados |
+| GET | /employees/{id} | Busca funcionario por ID |
+| POST | /employees | Cadastra um novo funcionario |
+| PUT | /employees/{id} | Atualiza dados de um funcionario |
+| DELETE | /employees/{id} | Remove um funcionario |
+| POST | /send-email | Dispara envio de e-mail |
+| POST | /photos | Realiza upload de foto |
+
+## Autores
+
+- [Paulo Vitor](https://github.com/Wpnnt)
+- [Rodrigo Duarte Silva](https://github.com/rodrigoduartesilva)
+- Odara Jara
+- Bryan

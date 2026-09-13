@@ -1,6 +1,6 @@
 package com.projetofinal.backend.enums;
 
-public enum StatusEmail {
-	ENVIADO,
-	ERRO
+public enum EmailStatus {
+	SENT,
+	ERROR
 }

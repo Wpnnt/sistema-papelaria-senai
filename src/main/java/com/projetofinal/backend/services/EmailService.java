@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.projetofinal.backend.entities.EmailModel;
-import com.projetofinal.backend.enums.StatusEmail;
+import com.projetofinal.backend.enums.EmailStatus;
 import com.projetofinal.backend.repositories.EmailRepository;
 
 import jakarta.transaction.Transactional;
@@ -24,21 +24,20 @@ public class EmailService {
 	private JavaMailSender emailSender;
 
 	@Transactional
-	public EmailModel enviarEmail(EmailModel emailModel) {
-		emailModel.setSendDateEmail(LocalDateTime.now());
+	public EmailModel sendEmail(EmailModel email) {
+		email.setSentAt(LocalDateTime.now());
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
-			message.setFrom(emailModel.getEmailFrom());
-			message.setTo(emailModel.getEmailTo());
-			message.setSubject(emailModel.getTituloEmail());
-			message.setText(emailModel.getCorpoEmail());
+			message.setFrom(email.getEmailFrom());
+			message.setTo(email.getEmailTo());
+			message.setSubject(email.getSubject());
+			message.setText(email.getBody());
 			emailSender.send(message);
 
-			emailModel.setStatusEmail(StatusEmail.ENVIADO);
+			email.setStatus(EmailStatus.SENT);
 		} catch (MailException e) {
-			emailModel.setStatusEmail(StatusEmail.ERRO);
-		} finally {
-			return repository.save(emailModel);
+			email.setStatus(EmailStatus.ERROR);
 		}
+		return repository.save(email);
 	}
 }
