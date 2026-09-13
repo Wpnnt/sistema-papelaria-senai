@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.projetofinal</groupId>
-	<artifactId>backend</artifactId>
+	<artifactId>sistema-papelaria-senai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend</name>
-	<description>Projeto final curso de backend usando Spring Boot</description>
+	<name>sistema-papelaria-senai</name>
+	<description>Sistema de papelaria desenvolvido no curso SENAI / FIRJAN</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

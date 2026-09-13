@@ -1,6 +1,6 @@
-# Projeto Final Back-End - Papelaria
+# Sistema Papelaria SENAI
 
-API REST desenvolvida como projeto final do curso de backend (SENAI / FIRJAN). O sistema gerencia produtos, controle de estoque basico, cadastro de funcionarios com controle de acesso, envio de e-mails e upload de imagens.
+Sistema de gestao para papelaria desenvolvido como projeto no curso do SENAI / FIRJAN. A aplicacao conta com API REST em Java e Spring Boot para gerenciamento de produtos, controle de estoque basico, cadastro de funcionarios com controle de acesso, envio de e-mails, upload de imagens e suporte para futura integracao com interface web.
 
 ## Tecnologias Utilizadas
 
@@ -42,8 +42,8 @@ O banco de dados e estruturado com entidades em ingles seguindo o padrao da apli
 
 1. Clone o repositorio:
 ```bash
-git clone https://github.com/Wpnnt/projeto-final-backend.git
-cd projeto-final-backend
+git clone https://github.com/Wpnnt/sistema-papelaria-senai.git
+cd sistema-papelaria-senai
 ```
 
 2. Configure o banco de dados:
