@@ -19,6 +19,7 @@ import com.projetofinal.backend.services.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/products")
@@ -42,14 +43,14 @@ public class ProductController {
 
 	@Operation(summary = "Create product", description = "Registers a new product in inventory")
 	@PostMapping
-	public ResponseEntity<Product> create(@RequestBody Product product) {
+	public ResponseEntity<Product> create(@Valid @RequestBody Product product) {
 		Product created = service.create(product);
 		return ResponseEntity.status(HttpStatus.CREATED).body(created);
 	}
 
 	@Operation(summary = "Update product", description = "Updates an existing product's data")
 	@PutMapping("/{id}")
-	public ResponseEntity<Product> update(@PathVariable Integer id, @RequestBody Product product) {
+	public ResponseEntity<Product> update(@PathVariable Integer id, @Valid @RequestBody Product product) {
 		Product updated = service.update(id, product);
 		return ResponseEntity.ok(updated);
 	}

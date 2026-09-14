@@ -15,6 +15,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "employees")
@@ -25,12 +27,15 @@ public class Employee implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotBlank(message = "Employee name is required.")
 	@Column(nullable = false)
 	private String name;
 
 	@Column(nullable = false)
 	private String password;
 
+	@NotBlank(message = "Employee email is required.")
+	@Email(message = "Invalid email format.")
 	@Column(unique = true, nullable = false)
 	private String email;
 

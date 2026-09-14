@@ -19,6 +19,7 @@ import com.projetofinal.backend.services.EmployeeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/employees")
@@ -42,14 +43,14 @@ public class EmployeeController {
 
 	@Operation(summary = "Create employee", description = "Registers a new employee")
 	@PostMapping
-	public ResponseEntity<Employee> create(@RequestBody Employee employee) {
+	public ResponseEntity<Employee> create(@Valid @RequestBody Employee employee) {
 		Employee created = service.create(employee);
 		return ResponseEntity.status(HttpStatus.CREATED).body(created);
 	}
 
 	@Operation(summary = "Update employee", description = "Updates an existing employee's information")
 	@PutMapping("/{id}")
-	public ResponseEntity<Employee> update(@PathVariable Integer id, @RequestBody Employee employee) {
+	public ResponseEntity<Employee> update(@PathVariable Integer id, @Valid @RequestBody Employee employee) {
 		Employee updated = service.update(id, employee);
 		return ResponseEntity.ok(updated);
 	}

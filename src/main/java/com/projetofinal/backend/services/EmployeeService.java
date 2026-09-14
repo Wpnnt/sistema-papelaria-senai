@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.projetofinal.backend.entities.Employee;
+import com.projetofinal.backend.exceptions.BadRequestException;
+import com.projetofinal.backend.exceptions.ConflictException;
 import com.projetofinal.backend.exceptions.NotFoundException;
 import com.projetofinal.backend.repositories.EmployeeRepository;
 
@@ -29,14 +31,26 @@ public class EmployeeService {
 	}
 
 	public Employee create(Employee employee) {
-		if (employee.getPassword() != null) {
-			employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+		if (employee.getPassword() == null || employee.getPassword().isBlank()) {
+			throw new BadRequestException("Employee password is required.");
 		}
+		if (employee.getEmail() != null && repository.findByEmail(employee.getEmail()).isPresent()) {
+			throw new ConflictException("An employee with email '" + employee.getEmail() + "' already exists.");
+		}
+		employee.setPassword(passwordEncoder.encode(employee.getPassword()));
 		return repository.save(employee);
 	}
 
 	public Employee update(Integer id, Employee employee) {
 		Employee existing = this.findById(id);
+
+		if (employee.getEmail() != null && !employee.getEmail().equalsIgnoreCase(existing.getEmail())) {
+			repository.findByEmail(employee.getEmail()).ifPresent(other -> {
+				if (!other.getId().equals(id)) {
+					throw new ConflictException("An employee with email '" + employee.getEmail() + "' already exists.");
+				}
+			});
+		}
 
 		existing.setName(employee.getName());
 		existing.setEmail(employee.getEmail());

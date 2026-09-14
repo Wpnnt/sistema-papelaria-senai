@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "products")
@@ -14,9 +17,18 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotBlank(message = "Product name is required.")
 	private String name;
+
+	@NotBlank(message = "Product category is required.")
 	private String category;
+
+	@NotNull(message = "Product quantity is required.")
+	@PositiveOrZero(message = "Product quantity must be zero or positive.")
 	private Integer quantity;
+
+	@NotNull(message = "Product price is required.")
+	@PositiveOrZero(message = "Product price must be zero or positive.")
 	private Float price;
 
 	public Product() {}
